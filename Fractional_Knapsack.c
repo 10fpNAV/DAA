@@ -14,17 +14,26 @@ double calcrat(int profit, int w) {
 }
 
 void greedy_knapsack(double w, int n, struct Item a[]) {
-    int currentWeight = 0;
+    double currentWeight = 0;
+
+    printf("Object num\tXi\t   Remaining weight\n");
 
     for (int i = 0; i < n; i++) {
+        printf("%d\t\t", i + 1);
+
         if (currentWeight + a[i].w <= w) {
             currentWeight += a[i].w;
             tp += a[i].profit;
+            printf("%d\t\t", 1);  
         } else {
-            double remainingWeight = w - currentWeight;
-            tp += (double) a[i].profit / a[i].w * remainingWeight;
+            double fraction = (w - currentWeight) / a[i].w;
+            tp += a[i].profit * fraction;
+            currentWeight += a[i].w * fraction;
+            printf("%lf\t\t", fraction);  
             break;
         }
+
+        printf("%lf\n", w - currentWeight);
     }
 }
 
@@ -63,9 +72,11 @@ int main() {
         if (swapped == 0)
             break;
     }
-
+    printf("\n");
     greedy_knapsack(tw, num, a);
-    printf("The maximum profit is %lf\n", tp);
+    printf("\n");
+    printf("\nThe maximum profit is %lf\n", tp);
 
     return 0;
 }
+
