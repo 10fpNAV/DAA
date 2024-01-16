@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 struct Node {
     char data;
@@ -74,6 +75,7 @@ void printcodes(struct Node* root, char code[], int top) {
     if (root->left == NULL && root->right == NULL) {
         code[top] = '\0';
         printf("Character: %c, Code: %s\n", root->data, code);
+
     }
 }
 
